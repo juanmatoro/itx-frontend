@@ -1,7 +1,7 @@
-// Testeando el cliente de API
 import { getProducts } from '../client';
 
-global.fetch = vi.fn(() =>
+// → Mock global fetch con Jest
+global.fetch = jest.fn(() =>
   Promise.resolve({
     ok: true,
     json: () => Promise.resolve([{ id: '1' }]),
@@ -9,10 +9,16 @@ global.fetch = vi.fn(() =>
 );
 
 describe('API client', () => {
-  it('caches product list', async () => {
-    const data1 = await getProducts();
-    const data2 = await getProducts();
-    expect(fetch).toHaveBeenCalledTimes(1); // segunda llamada vino de caché
-    expect(data2[0].id).toBe('1');
+  beforeEach(() => {
+    fetch.mockClear();
+    localStorage.clear(); // vacía caché entre tests
+  });
+
+  it('caches product list for subsequent calls', async () => {
+    const first = await getProducts(); // hit de red
+    const second = await getProducts(); // caché
+
+    expect(fetch).toHaveBeenCalledTimes(1); // solo la primera vez
+    expect(second[0].id).toBe('1');
   });
 });
