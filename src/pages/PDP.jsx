@@ -7,33 +7,34 @@ import SelectInput from '../components/SelectInput';
 export default function ProductDetailsPage() {
   const { id } = useParams();
   const { data: product, loading, error } = useProduct(id);
+  const [addToCart, { loading: adding }] = useAddToCart();
 
   // estado local de selectores
   const [color, setColor] = useState('');
   const [storage, setStorage] = useState('');
 
-  // acción para añadir al carrito
-  const [addToCart, { loading: adding }] = useAddToCart();
-
-  /* -------------------- efectos -------------------- */
-  // Cuando llega el producto, establece valores por defecto
+  /* -------- efecto: inicializa selects cuando llega el producto -------- */
   useEffect(() => {
     if (!product) return;
 
-    if (product.colors?.length && color === '') {
-      setColor(product.colors[0].code);
+    if (product.options?.colors?.length && color === '') {
+      setColor(product.options.colors[0].code);
     }
 
-    if (product.storages?.length && storage === '') {
-      setStorage(product.storages[0].code);
+    if (product.options?.storages?.length && storage === '') {
+      setStorage(product.options.storages[0].code);
     }
   }, [product, color, storage]);
 
-  /* -------------------- handlers ------------------- */
+  /* --------------------- manejador añadir --------------------- */
   const handleAdd = () =>
-    addToCart({ id: product.id, colorCode: Number(color), storageCode: Number(storage) });
+    addToCart({
+      id: product.id,
+      colorCode: Number(color),
+      storageCode: Number(storage),
+    });
 
-  /* -------------------- render --------------------- */
+  /* ------------------------ render ------------------------ */
   if (loading) return <p>Cargando detalle…</p>;
   if (error || !product) return <p>Producto no encontrado</p>;
 
@@ -44,23 +45,23 @@ export default function ProductDetailsPage() {
       </Link>
 
       <div className="grid md:grid-cols-2 gap-8">
-        {/* imagen */}
+        {/* Imagen */}
         <div className="border rounded p-4 flex items-center justify-center">
           <img src={product.imgUrl} alt={product.model} className="max-h-96 object-contain" />
         </div>
 
-        {/* detalles */}
+        {/* Detalles */}
         <div>
           <h2 className="text-2xl font-bold mb-2">
             {product.brand} {product.model}
           </h2>
           <p className="text-indigo-600 text-xl font-bold mb-6">{product.price} €</p>
 
-          {/* select color */}
-          {product.colors?.length > 0 && (
+          {/* Selector color */}
+          {product.options?.colors?.length > 0 && (
             <SelectInput
               label="Color"
-              options={product.colors.map((c) => ({
+              options={product.options.colors.map((c) => ({
                 code: c.code,
                 name: c.name,
               }))}
@@ -69,11 +70,11 @@ export default function ProductDetailsPage() {
             />
           )}
 
-          {/* select almacenamiento */}
-          {product.storages?.length > 0 && (
+          {/* Selector almacenamiento */}
+          {product.options?.storages?.length > 0 && (
             <SelectInput
               label="Almacenamiento"
-              options={product.storages.map((s) => ({
+              options={product.options.storages.map((s) => ({
                 code: s.code,
                 name: s.name,
               }))}
@@ -82,7 +83,7 @@ export default function ProductDetailsPage() {
             />
           )}
 
-          {/* botón añadir */}
+          {/* Botón añadir */}
           <button
             onClick={handleAdd}
             disabled={adding || !color || !storage}
