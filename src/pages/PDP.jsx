@@ -51,13 +51,46 @@ export default function ProductDetailsPage() {
         </div>
 
         {/* Detalles */}
+
         <div>
           <h2 className="text-2xl font-bold mb-2">
-            {product.brand} {product.model}
+            Marca: {product.brand} {product.brand}
           </h2>
-          <p className="text-indigo-600 text-xl font-bold mb-6">{product.price} €</p>
+          <h3 className="text-2xl font-bold mb-2">Modelo:  {product.model}</h3>
+          <p className="text-indigo-600 text-xl font-bold mb-4">{product.price} €</p>
 
-          {/* Selector color */}
+          {/* Descripción técnica */}
+          <h3 className="font-semibold mb-2">Descripción del producto</h3>
+          <dl className="grid grid-cols-[auto,1fr] gap-y-2 gap-x-4 text-sm mb-6">
+            <dt className="font-medium">CPU</dt>
+            <dd>{product.cpu ?? '—'}</dd>
+
+            <dt className="font-medium">RAM</dt>
+            <dd>{product.ram ?? '—'}</dd>
+
+            <dt className="font-medium">Sistema operativo</dt>
+            <dd>{product.os ?? '—'}</dd>
+
+            <dt className="font-medium">Resolución pantalla</dt>
+            <dd>{product.displayResolution ?? '—'}</dd>
+
+            <dt className="font-medium">Batería</dt>
+            <dd>{product.battery ?? '—'}</dd>
+
+            <dt className="font-medium">Cámaras</dt>
+            <dd>
+              {product.primaryCamera ?? '—'}
+              {product.secondaryCmera && ` / ${product.secondaryCmera}`}
+            </dd>
+
+            <dt className="font-medium">Dimensiones</dt>
+            <dd>{product.dimentions ?? '—'}</dd>
+
+            <dt className="font-medium">Peso</dt>
+            <dd>{product.weight ?? '—'}</dd>
+          </dl>
+
+          {/* Selectores de color y almacenamiento (sin cambios) */}
           {product.options?.colors?.length > 0 && (
             <SelectInput
               label="Color"
@@ -70,7 +103,6 @@ export default function ProductDetailsPage() {
             />
           )}
 
-          {/* Selector almacenamiento */}
           {product.options?.storages?.length > 0 && (
             <SelectInput
               label="Almacenamiento"
