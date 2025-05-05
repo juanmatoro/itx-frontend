@@ -1,8 +1,9 @@
+// src/api/hooks.js
 import { useEffect, useState } from 'react';
 import { getProducts, getProduct, addToCart } from './client';
 import { useCart } from '../context/CartContext';
 
-/* Hook listado */
+/* ---------- Hook: listado de productos ---------- */
 export function useProducts() {
   const [state, setState] = useState({ data: null, loading: true, error: null });
 
@@ -19,7 +20,7 @@ export function useProducts() {
   return state; // {data, loading, error}
 }
 
-/* Hook detalle */
+/* ---------- Hook: detalle de producto ---------- */
 export function useProduct(id) {
   const [state, setState] = useState({ data: null, loading: true, error: null });
 
@@ -37,21 +38,28 @@ export function useProduct(id) {
   return state;
 }
 
-/* Hook acción add to cart + side‑effect global */
+/* ---------- Hook: añadir al carrito ---------- */
 export function useAddToCart() {
-  const { setCount } = useCart();
+  const { count: current, setCount } = useCart();
   const [status, setStatus] = useState({ loading: false, error: null });
 
   async function add(item) {
     setStatus({ loading: true, error: null });
     try {
       const { count } = await addToCart(item);
-      setCount(count); // <-- actualiza global
+
+      // Si el backend devuelve un valor mayor, úsalo; si no, incrementa localmente
+      if (typeof count === 'number' && count > current) {
+        setCount(count);
+      } else {
+        setCount((prev) => prev + 1);
+      }
+
       setStatus({ loading: false, error: null });
     } catch (e) {
       setStatus({ loading: false, error: e });
     }
   }
 
-  return [add, status]; // igual que useMutation: fn, {loading,error}
+  return [add, status]; // [función, {loading, error}]
 }
