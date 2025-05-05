@@ -72,6 +72,10 @@ export async function getProduct(id) {
  *  - NO se cachea, pero actualizamos localStorage(cartCount)
  */
 export async function addToCart({ id, colorCode, storageCode }) {
-  const body = JSON.stringify({ id, colorCode, storageCode });
+  const body = JSON.stringify({
+    id,
+    colorCode: Number(colorCode),
+    storageCode: Number(storageCode),
+  });
   return fetchJSON('/api/cart', { method: 'POST', body });
 }

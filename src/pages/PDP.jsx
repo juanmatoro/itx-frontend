@@ -30,7 +30,8 @@ export default function ProductDetailsPage() {
   }, [product, color, storage]);
 
   /* -------------------- handlers ------------------- */
-  const handleAdd = () => addToCart({ id: product.id, colorCode: color, storageCode: storage });
+  const handleAdd = () =>
+    addToCart({ id: product.id, colorCode: Number(color), storageCode: Number(storage) });
 
   /* -------------------- render --------------------- */
   if (loading) return <p>Cargando detalle…</p>;
@@ -84,7 +85,7 @@ export default function ProductDetailsPage() {
           {/* botón añadir */}
           <button
             onClick={handleAdd}
-            disabled={adding}
+            disabled={adding || !color || !storage}
             className="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded disabled:opacity-60"
           >
             {adding ? 'Añadiendo…' : 'Añadir al carrito'}
