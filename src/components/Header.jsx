@@ -30,7 +30,7 @@ export default function Header() {
         className="text-xl font-bold flex items-center gap-2 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         aria-label="Ir a la página principal de ITX Store"
       >
-        <img src="/logo.svg" alt="" className="h-10 sm:h-12 w-auto" />{' '}
+        <img src="/logo1.svg" alt="" className="h-10 sm:h-12 w-auto" />{' '}
         {/* Alt vacío si es decorativo */}
         <span className="hidden sm:inline">ITX Store</span>{' '}
         {/* Ocultar texto en móvil si logo es suficiente */}
