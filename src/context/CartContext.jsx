@@ -19,6 +19,9 @@ export function CartProvider({ children }) {
   /* ------------ acciones ------------ */
   const addItem = (item) => setItems((prev) => [...prev, item]);
   const clearCart = () => setItems([]);
+  const removeItem = (indexToRemove) => {
+    setItems((prev) => prev.filter((_, index) => index !== indexToRemove));
+  };
 
   /* ------------ API pública ------------ */
   const value = {
@@ -26,6 +29,7 @@ export function CartProvider({ children }) {
     count: items.length, // derivado
     addItem,
     clearCart,
+    removeItem, // ✅ nueva acción
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

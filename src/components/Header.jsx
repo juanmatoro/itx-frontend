@@ -18,8 +18,7 @@ export default function Header() {
   return (
     <header className="flex items-center justify-between pt-4 pl-12 pb-4 pr-12 shadow">
       <Link to="/" className="text-xl font-bold">
-        <img src="/logo.svg" alt="Logo" className="h-12 w-auto inline-block mr-2" />
-        ITX Store
+        <img src="/logo1.svg" alt="Logo" className="h-16 w-auto inline-block mr-2" />
       </Link>
 
       <nav className="text-sm text-gray-500">{crumbs}</nav>

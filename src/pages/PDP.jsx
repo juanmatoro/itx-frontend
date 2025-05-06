@@ -52,9 +52,10 @@ export default function ProductDetailsPage() {
         {/* detalles */}
         <div>
           <h2 className="text-2xl font-bold mb-2">
-            {product.brand} {product.model}
+            Marca: {product.brand} <br />
+            Modelo: {product.model}
           </h2>
-          <p className="text-indigo-600 text-xl font-bold mb-4">{product.price} €</p>
+          <p className="text-indigo-600 text-xl font-bold mb-4">Precio: {product.price}€</p>
 
           {/* descripción técnica */}
           <h3 className="font-semibold mb-2">Descripción del producto</h3>

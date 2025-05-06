@@ -19,7 +19,7 @@ export default function ProductListPage() {
   if (error) return <p>Error al cargar productos</p>;
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 ">
       <div className="flex mb-6 justify-between items-center">
         <h1 className="text-2xl font-semibold mb-4">Productos disponibles:</h1>
         <SearchBar value={query} onChange={setQuery} />

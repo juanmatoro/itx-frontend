@@ -5,4 +5,5 @@
 /* Si quieres estilos globales propios, añádelos debajo */
 body {
   @apply bg-gray-50 text-gray-800;
+  @apply border-none;
 }
