@@ -1,3 +1,5 @@
+// src/components/ProductCard.jsx
+
 import { Link } from 'react-router-dom';
 
 export default function ProductCard({ product }) {
@@ -6,8 +8,9 @@ export default function ProductCard({ product }) {
   return (
     <Link
       to={`/product/${id}`}
-      className="group block bg-white rounded-lg shadow-sm hover:shadow-md transition duration-200 ease-in-out p-4 hover:-translate-y-1"
+      className="group block bg-white rounded-lg shadow-sm hover:shadow-md transition duration-200 ease-in-out p-4 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
     >
+      {/* Imagen cuadrada con object-fit */}
       <div className="aspect-square overflow-hidden flex items-center justify-center mb-3">
         <img
           src={imgUrl}
@@ -17,9 +20,9 @@ export default function ProductCard({ product }) {
         />
       </div>
 
+      {/* Detalles del producto */}
       <h3 className="font-semibold text-sm">Marca: {brand}</h3>
       <h3 className="font-bold text-sm">Modelo: {model}</h3>
-
       <p className="text-indigo-600 font-bold mt-1">Precio: {price} €</p>
     </Link>
   );
