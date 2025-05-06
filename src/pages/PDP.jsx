@@ -94,7 +94,7 @@ export default function ProductDetailsPage() {
             <dd>{product.weight ? `${product.weight}g` : '—'}</dd> {/* Añadido 'g' */}
           </dl>
           {/* Selectores de Opciones */}
-          <div className="space-y-4 mb-6">
+          <div className="w-full max-w-40 space-y-4 mb-6">
             {' '}
             {/* Agrupados para mejor espaciado */}
             {product.options?.colors?.length >= 1 && (
@@ -111,6 +111,7 @@ export default function ProductDetailsPage() {
                 options={product.options.storages.map((s) => ({ code: s.code, name: s.name }))}
                 value={storage}
                 onChange={setStorage}
+                // Añadido margen superior para separación
               />
             )}
           </div>
