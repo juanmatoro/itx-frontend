@@ -1,12 +1,62 @@
-# React + Vite
+# ITX Frontend Test - Mini E-commerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una solución para la prueba técnica de Front-End de ITX, consistente en una pequeña aplicación de comercio electrónico para visualizar y comprar dispositivos móviles.
 
-Currently, two official plugins are available:
+La aplicación permite ver un listado de productos, filtrar por marca o modelo, ver los detalles de un producto específico, seleccionar opciones (color, almacenamiento) y añadir productos a un carrito de compra virtual.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologías Utilizadas
 
-## Expanding the ESLint configuration
+- **Framework:** React (v19)
+- **Bundler:** Vite
+- **Estilos:** Tailwind CSS
+- **Routing:** React Router DOM (v7)
+- **Estado Global:** React Context API
+- **Testing:** Jest + React Testing Library
+- **Linting/Formatting:** ESLint + Prettier
+- **Hooks Git:** Husky + lint-staged
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Requisitos Previos
+
+- Node.js (Se recomienda v18 o superior)
+- npm (v8+) o yarn
+
+## Instalación
+
+1.  Clona el repositorio:
+    ```bash
+    git clone <url-del-repositorio>
+    cd itx-frontend
+    ```
+2.  Instala las dependencias:
+    ```bash
+    npm install
+    # o si usas yarn:
+    # yarn install
+    ```
+
+## Scripts Disponibles
+
+En el directorio del proyecto, puedes ejecutar:
+
+- ### `npm run dev` (o `yarn dev`)
+
+  Ejecuta la aplicación en modo desarrollo.<br />
+  Abre [http://localhost:5173](http://localhost:5173) (o el puerto que indique Vite) para verla en tu navegador. La página se recargará si haces cambios.
+
+- ### `npm test` (o `yarn test`)
+
+  Lanza el corredor de tests (Jest) en modo interactivo.
+
+- ### `npm run lint` (o `yarn lint`)
+
+  Ejecuta ESLint para revisar el código en busca de problemas de estilo o errores potenciales.
+
+- ### `npm run build` (o `yarn build`)
+  Compila la aplicación para producción en la carpeta `dist/`.<br />
+  Optimiza la build para el mejor rendimiento.
+
+## Notas Adicionales
+
+- **API:** La aplicación consume datos de una API proporcionada para la prueba (`https://itx-frontend-test.onrender.com/`).
+- **Cache:** Se implementa un sistema de caché en el lado del cliente usando `localStorage` para las peticiones GET de productos y detalles de producto. La caché tiene una duración de 1 hora para evitar peticiones repetitivas.
+- **Carrito:** El estado del carrito (ítems añadidos) también se persiste en `localStorage` para que no se pierda al recargar la página.
